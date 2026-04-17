@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberMaxx USA — Professional-Grade Clippers</title>
+    <meta name="description" content="Professional-grade VGR clippers by BarberMaxx USA. Built for daily use, trusted in 30+ countries. Now available for barbers in the US.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #090909;
+            --bg-2: #0f0f0f;
+            --bg-card: #141414;
+            --bg-card-hover: #191919;
+            --gold: #c9a84e;
+            --gold-light: #dfc074;
+            --gold-dark: #a68a3e;
+            --gold-dim: rgba(201,168,78,0.08);
+            --gold-border: rgba(201,168,78,0.18);
+            --white: #f2f2f2;
+            --gray: #999;
+            --muted: #555;
+            --border: #1e1e1e;
+            --border-l: #262626;
+            --red: #c0392b;
+        }
+
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* NAVBAR */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 0 2rem; height: 68px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(9,9,9,0.8);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+        }
+        .nav.scrolled { border-bottom-color: var(--border); }
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem; font-weight: 700;
+            color: var(--white); text-decoration: none; letter-spacing: -0.5px;
+        }
+        .nav-logo span { color: var(--gold); }
+        .nav-cta {
+            padding: 9px 22px; background: var(--gold); color: #090909;
+            font-weight: 600; font-size: 0.82rem; text-decoration: none;
+            border-radius: 6px; transition: all 0.3s; letter-spacing: 0.2px;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(201,168,78,0.3); }
+
+        /* BUTTONS */
+        .btn-p {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 15px 30px; background: var(--gold); color: #090909;
+            font-weight: 700; font-size: 0.92rem; text-decoration: none;
+            border-radius: 8px; border: none; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-p:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,78,0.35); }
+        .btn-p svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .btn-p:hover svg { transform: translateX(3px); }
+
+        .btn-s {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 15px 26px; background: transparent; color: var(--gray);
+            font-weight: 600; font-size: 0.92rem; text-decoration: none;
+            border-radius: 8px; border: 1px solid var(--border-l); transition: all 0.3s;
+        }
+        .btn-s:hover { border-color: var(--muted); color: var(--white); background: rgba(255,255,255,0.03); }
+
+        .slabel {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.72rem; font-weight: 600; color: var(--gold);
+            text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 1.5rem;
+        }
+        .slabel::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding-top: 68px; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -20%; right: -15%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(201,168,78,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 200px; background: linear-gradient(to top, var(--bg), transparent);
+            pointer-events: none; z-index: 3;
+        }
+        .hero-grid {
+            display: grid; grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem; align-items: center; position: relative; z-index: 2;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 16px; background: var(--gold-dim);
+            border: 1px solid var(--gold-border); border-radius: 100px;
+            font-size: 0.72rem; font-weight: 600; color: var(--gold);
+            letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+        .hero-badge::before {
+            content: ''; width: 6px; height: 6px; background: var(--gold);
+            border-radius: 50%; animation: pls 2s infinite;
+        }
+        @keyframes pls { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.6rem, 4.8vw, 4rem);
+            font-weight: 700; line-height: 1.06; letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 .hl {
+            background: linear-gradient(135deg, #c9a84e, #dfc074);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-sub {
+            font-size: 1.1rem; color: var(--gray); line-height: 1.7;
+            margin-bottom: 2.5rem; max-width: 500px;
+        }
+        .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        .hero-stats {
+            display: flex; gap: 3rem; margin-top: 3rem;
+            padding-top: 2rem; border-top: 1px solid var(--border);
+        }
+        .hero-stat .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.9rem; font-weight: 700; color: var(--gold); line-height: 1;
+        }
+        .hero-stat .lbl {
+            font-size: 0.75rem; color: var(--muted); margin-top: 4px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .hero-vis { position: relative; display: flex; justify-content: center; }
+        .hero-img {
+            position: relative; width: 100%; max-width: 460px;
+            aspect-ratio: 4/5; border-radius: 16px; overflow: hidden;
+            background: var(--bg-2); border: 1px solid var(--border);
+        }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-float {
+            position: absolute; bottom: -16px; left: -24px;
+            background: rgba(20,20,20,0.9); border: 1px solid var(--border);
+            border-radius: 12px; padding: 14px 18px;
+            display: flex; align-items: center; gap: 12px;
+            backdrop-filter: blur(16px); animation: fl 3s ease-in-out infinite;
+        }
+        @keyframes fl { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .hero-float .ic {
+            width: 42px; height: 42px; background: var(--gold-dim);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+        }
+        .hero-float .ic svg { width: 20px; height: 20px; color: var(--gold); }
+        .hero-float strong { font-size: 0.9rem; display: block; }
+        .hero-float span { font-size: 0.72rem; color: var(--muted); }
+
+        /* PAIN */
+        .pain { padding: 7rem 0; position: relative; }
+        .pain-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+        .pain h2, .benefits h2, .products h2, .proof h2, .objections h2, .comparison h2, .video-section h2, .cta-end h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+            font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 1.5rem;
+        }
+        .pain-text { font-size: 1.1rem; color: var(--gray); line-height: 1.8; }
+        .pain-text strong { color: var(--white); }
+        .pain-hl {
+            display: inline-block; margin-top: 1rem; font-size: 1.25rem;
+            font-weight: 700; color: var(--gold); font-family: 'Space Grotesk', sans-serif;
+        }
+        .pain-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+        .pain-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.8rem 1.5rem; text-align: left; transition: all 0.3s;
+        }
+        .pain-card:hover { border-color: var(--gold-border); transform: translateY(-4px); }
+        .pain-card-ic {
+            width: 46px; height: 46px; background: rgba(192,57,43,0.1);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1rem; color: var(--red);
+        }
+        .pain-card-ic svg { width: 22px; height: 22px; }
+        .pain-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .pain-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+        /* BENEFITS */
+        .benefits { padding: 7rem 0; background: var(--bg-2); position: relative; }
+        .benefits::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        .benefits-hdr { text-align: center; margin-bottom: 3.5rem; }
+        .benefits-sub { font-size: 1rem; color: var(--gray); max-width: 520px; margin: 0 auto; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+        .b-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 2.2rem 1.8rem; transition: all 0.4s;
+            position: relative; overflow: hidden;
+        }
+        .b-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 3px; height: 0; background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+            transition: height 0.4s; border-radius: 0 0 3px 0;
+        }
+        .b-card:hover::before { height: 100%; }
+        .b-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+        .b-card:first-child { grid-column: 1/-1; display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: center; }
+        .b-ic {
+            width: 50px; height: 50px; background: var(--gold-dim);
+            border: 1px solid var(--gold-border); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.2rem; color: var(--gold);
+        }
+        .b-ic svg { width: 24px; height: 24px; }
+        .b-card:first-child .b-ic { width: 64px; height: 64px; margin-bottom: 0; }
+        .b-card:first-child .b-ic svg { width: 32px; height: 32px; }
+        .b-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.3px;
+        }
+        .b-card:first-child h3 { font-size: 1.3rem; }
+        .b-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+
+        /* VIDEO SECTION */
+        .video-section {
+            padding: 7rem 0; position: relative; background: var(--bg); overflow: hidden;
+        }
+        .video-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+        .video-header { text-align: center; margin-bottom: 3rem; }
+        .video-wrapper {
+            position: relative; max-width: 1000px; margin: 0 auto;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border-l);
+            aspect-ratio: 16/9;
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.6);
+        }
+        .video-wrapper iframe {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; border: 0;
+        }
+        .video-glow {
+            position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 300px;
+            background: radial-gradient(ellipse, rgba(201,168,78,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* PRODUCTS */
+        .products { padding: 7rem 0; background: var(--bg-2); position: relative; }
+        .products::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        .products-hdr { text-align: center; margin-bottom: 2rem; }
+        .products-sub { font-size: 1rem; color: var(--gray); max-width: 500px; margin: 0 auto 2.5rem; }
+
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex; gap: 0.5rem; justify-content: center;
+            margin-bottom: 3rem; flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 8px 20px; border-radius: 100px; font-size: 0.8rem;
+            font-weight: 600; cursor: pointer; transition: all 0.3s;
+            background: transparent; border: 1px solid var(--border);
+            color: var(--muted); font-family: inherit;
+        }
+        .filter-tab:hover { border-color: var(--muted); color: var(--gray); }
+        .filter-tab.active {
+            background: var(--gold); color: #090909; border-color: var(--gold);
+        }
+
+        .products-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+        }
+        .p-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; overflow: hidden; transition: all 0.4s;
+            position: relative;
+        }
+        .p-card:hover { border-color: rgba(201,168,78,0.3); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+        .p-card.featured { border-color: rgba(201,168,78,0.25); }
+        .p-card .badge {
+            position: absolute; top: 12px; right: 12px; z-index: 5;
+            padding: 4px 10px; background: var(--gold); color: #090909;
+            font-size: 0.6rem; font-weight: 800; letter-spacing: 1px;
+            border-radius: 4px; text-transform: uppercase;
+        }
+        .p-card .badge.combo { background: var(--white); }
+        .p-img {
+            width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, #151515, #0f0f0f);
+            overflow: hidden; position: relative;
+        }
+        .p-img img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 0.5s ease;
+        }
+        .p-card:hover .p-img img { transform: scale(1.06); }
+        .p-info { padding: 1.2rem 1.3rem; }
+        .p-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem;
+        }
+        .p-type {
+            font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .p-specs { display: flex; flex-direction: column; gap: 6px; }
+        .p-spec {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 0.78rem; color: var(--gray);
+        }
+        .p-spec svg { width: 13px; height: 13px; color: var(--gold); flex-shrink: 0; }
+        .p-card[data-hidden="true"] { display: none; }
+
+        /* PROOF */
+        .proof { padding: 7rem 0; position: relative; }
+        .proof::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        .proof-hdr { text-align: center; margin-bottom: 3.5rem; }
+        .proof h2 .hl {
+            background: linear-gradient(135deg, #c9a84e, #dfc074);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .proof-sub { font-size: 1rem; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+        .proof-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-bottom: 3.5rem; }
+        .proof-st {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.8rem 1.2rem; text-align: center; transition: all 0.3s;
+        }
+        .proof-st:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+        .proof-st .sn {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.4rem;
+        }
+        .proof-st .sl { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .tests { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+        .test {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.8rem; transition: all 0.3s;
+        }
+        .test:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+        .stars { display: flex; gap: 2px; margin-bottom: 0.8rem; }
+        .stars svg { width: 14px; height: 14px; color: var(--gold); }
+        .test p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+        .test-author { display: flex; align-items: center; gap: 10px; }
+        .test-av {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: var(--gold-dim); border: 1px solid var(--gold-border);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.8rem; color: var(--gold);
+        }
+        .test-name { font-weight: 600; font-size: 0.85rem; }
+        .test-loc { font-size: 0.72rem; color: var(--muted); }
+
+        /* OBJECTIONS */
+        .objections { padding: 7rem 0; background: var(--bg-2); position: relative; }
+        .objections::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        .obj-hdr { text-align: center; margin-bottom: 3.5rem; }
+        .obj-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+        .obj-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 2.2rem 1.8rem; transition: all 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .obj-card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .obj-card:hover::after { opacity: 1; }
+        .obj-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+        .obj-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem; font-weight: 700; color: rgba(201,168,78,0.08); line-height: 1; margin-bottom: 0.8rem;
+        }
+        .obj-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--gold-light);
+        }
+        .obj-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+
+        /* COMPARISON */
+        .comparison { padding: 3.5rem 0 7rem; background: var(--bg-2); }
+        .comp-hdr { text-align: center; margin-bottom: 2.5rem; }
+        .comp-table {
+            max-width: 780px; margin: 0 auto; border: 1px solid var(--border);
+            border-radius: 14px; overflow: hidden;
+        }
+        .comp-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+        .comp-row:last-child { border-bottom: none; }
+        .comp-row.hdr { background: var(--bg-card); }
+        .comp-cell { padding: 0.9rem 1.3rem; font-size: 0.85rem; color: var(--gray); display: flex; align-items: center; }
+        .comp-row.hdr .comp-cell { font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+        .comp-cell:nth-child(2) { justify-content: center; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+        .comp-cell:nth-child(3) { justify-content: center; }
+        .comp-cell.vgr { background: rgba(201,168,78,0.03); }
+        .comp-row.hdr .comp-cell.vgr { color: var(--gold); background: rgba(201,168,78,0.07); }
+        .chk { color: var(--gold); } .crs { color: var(--muted); opacity: 0.3; }
+
+        /* CTA FINAL */
+        .cta-end { padding: 7rem 0; position: relative; overflow: hidden; }
+        .cta-end::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+        .cta-end::after {
+            content: ''; position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(circle, rgba(201,168,78,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta-inner { text-align: center; max-width: 620px; margin: 0 auto; position: relative; z-index: 2; }
+        .cta-end-text { font-size: 1.05rem; color: var(--gray); line-height: 1.7; margin-bottom: 2.5rem; }
+        .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-guar {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-top: 2rem; font-size: 0.78rem; color: var(--muted);
+        }
+        .cta-guar svg { width: 15px; height: 15px; color: var(--gold); }
+
+        /* FOOTER */
+        .footer { padding: 2.5rem 0; border-top: 1px solid var(--border); }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: var(--muted); }
+        .footer-logo span { color: var(--gold-dark); }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { font-size: 0.72rem; color: var(--muted); opacity: 0.5; }
+
+        /* FLOATING CTA */
+        .float-cta {
+            position: fixed; bottom: 0; left: 0; right: 0; padding: 1rem 1.5rem;
+            background: rgba(9,9,9,0.95); backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border); z-index: 999;
+            display: none; transform: translateY(100%); transition: transform 0.4s;
+        }
+        .float-cta.vis { transform: translateY(0); }
+        .float-cta a {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 13px; background: var(--gold); color: #090909; font-weight: 700;
+            font-size: 0.9rem; text-decoration: none; border-radius: 8px; width: 100%;
+        }
+
+        /* ANIMATIONS */
+        .rv { opacity: 0; transform: translateY(28px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
+        .rv.vis { opacity: 1; transform: translateY(0); }
+        .rv-1{transition-delay:.1s} .rv-2{transition-delay:.2s} .rv-3{transition-delay:.3s} .rv-4{transition-delay:.4s}
+
+        /* RESPONSIVE */
+        @media(max-width:1024px){
+            .hero-grid{grid-template-columns:1fr;gap:3rem;text-align:center}
+            .hero-sub{margin:0 auto 2.5rem}
+            .hero-actions{justify-content:center}
+            .hero-stats{justify-content:center}
+            .hero-vis{order:-1}
+            .hero-img{max-width:360px;margin:0 auto}
+            .hero-float{left:auto;right:-10px;bottom:16px}
+            .pain-cards{grid-template-columns:1fr}
+            .benefits-grid{grid-template-columns:1fr}
+            .b-card:first-child{grid-column:auto;grid-template-columns:1fr}
+            .b-card:first-child .b-ic{margin-bottom:1rem}
+            .products-grid{grid-template-columns:repeat(2,1fr)}
+            .proof-stats{grid-template-columns:repeat(2,1fr)}
+            .tests{grid-template-columns:1fr}
+            .obj-grid{grid-template-columns:1fr}
+        }
+        @media(max-width:768px){
+            .container{padding:0 1.25rem}
+            .nav{padding:0 1.25rem}
+            .hero{min-height:auto;padding-top:110px;padding-bottom:4rem}
+            .hero h1{font-size:2rem;letter-spacing:-1px}
+            .pain,.benefits,.products,.proof,.objections,.cta-end,.video-section{padding:5rem 0}
+            .products-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+            .float-cta{display:block}
+            .footer-inner{flex-direction:column;gap:1.5rem;text-align:center}
+            .footer-links{flex-wrap:wrap;justify-content:center}
+            body{padding-bottom:80px}
+        }
+        @media(max-width:480px){
+            .hero-actions{flex-direction:column;width:100%}
+            .hero-actions .btn-p,.hero-actions .btn-s{width:100%;justify-content:center}
+            .cta-btns{flex-direction:column}
+            .cta-btns .btn-p,.cta-btns .btn-s{width:100%;justify-content:center}
+            .products-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <a href="#" class="nav-logo">BARBER<span>MAXX</span></a>
+    <a href="#cta" class="nav-cta">Talk to a Specialist <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div>
+                <div class="hero-badge">Now Available in the USA</div>
+                <h1>Professional-grade clippers. <span class="hl">Without the premium price tag.</span></h1>
+                <p class="hero-sub">VGR clippers by BarberMaxx USA — built for daily use, trusted in 30+ countries, now available for barbers in the US.</p>
+                <div class="hero-actions">
+                    <a href="#cta" class="btn-p">Talk to a Specialist <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="#products" class="btn-s">See the Full Catalog</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><span class="num" data-count="30">0</span><span class="lbl">Countries</span></div>
+                    <div class="hero-stat"><span class="num" data-count="500" data-suffix="K">0</span><span class="lbl">Units Sold</span></div>
+                    <div class="hero-stat"><span class="num" data-count="10" data-suffix="+">0</span><span class="lbl">Years in Market</span></div>
+                </div>
+            </div>
+            <div class="hero-vis">
+                <div class="hero-img">
+                    <img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-001_1.jpg?v=1776262295" alt="VGR V-001 Professional Hair Clipper" loading="eager">
+                </div>
+                <div class="hero-float">
+                    <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <div><strong>All-Day Power</strong><span>240 min battery life</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain" id="pain">
+    <div class="container">
+        <div class="pain-inner rv">
+            <div class="slabel">The Problem</div>
+            <h2>Tired of clippers that lose power mid-cut?</h2>
+            <p class="pain-text">You know the feeling. A clipper that starts strong — then <strong>fades halfway through the fade.</strong> Uneven lines. Frustrated clients. A tool that costs too much to perform too little.</p>
+            <span class="pain-hl">You deserve better.</span>
+        </div>
+        <div class="pain-cards">
+            <div class="pain-card rv rv-1">
+                <div class="pain-card-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64A9 9 0 0 1 20.77 15"/><path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"/><path d="M12 2v4"/><path d="m2 2 20 20"/></svg></div>
+                <h4>Power Fade-Out</h4>
+                <p>Clipper loses RPM halfway through, ruining precision on every fade.</p>
+            </div>
+            <div class="pain-card rv rv-2">
+                <div class="pain-card-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg></div>
+                <h4>Frustrated Clients</h4>
+                <p>Uneven lines and pulled hair mean bad reviews and lost repeat business.</p>
+            </div>
+            <div class="pain-card rv rv-3">
+                <div class="pain-card-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="1" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                <h4>Overpriced Tools</h4>
+                <p>Premium price tags that don't deliver premium performance day after day.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" id="benefits">
+    <div class="container">
+        <div class="benefits-hdr rv">
+            <div class="slabel">The Solution</div>
+            <h2>Built for professionals who don't compromise.</h2>
+            <p class="benefits-sub">VGR clippers deliver the performance you need — every cut, every client, every day.</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="b-card rv">
+                <div class="b-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div><h3>Consistent Power</h3><p>Full performance from first cut to last. No fade-out, no slowdown. The motor maintains peak RPM throughout the entire session.</p></div>
+            </div>
+            <div class="b-card rv rv-1">
+                <div class="b-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg></div>
+                <div><h3>Precision Blade</h3><p>Clean fades, sharp lines, every time. Engineered for zero-gap capability.</p></div>
+            </div>
+            <div class="b-card rv rv-2">
+                <div class="b-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg></div>
+                <div><h3>Ergonomic Grip</h3><p>Long sessions without hand fatigue. Balanced weight distribution for all-day comfort.</p></div>
+            </div>
+            <div class="b-card rv rv-3">
+                <div class="b-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3"/></svg></div>
+                <div><h3>Long Battery Life</h3><p>All-day use on a single charge. 240+ minutes so you never stop mid-client.</p></div>
+            </div>
+            <div class="b-card rv rv-4">
+                <div class="b-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m2 12 10 10"/><path d="m12 2 10 10"/></svg></div>
+                <div><h3>International-Grade Quality</h3><p>Trusted across 30+ countries. Same professional standard, now in the US.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="video">
+    <div class="container">
+        <div class="video-header rv">
+            <div class="slabel">See It In Action</div>
+            <h2>The professional standard. <span class="hl">Now in the US.</span></h2>
+        </div>
+        <div class="video-wrapper rv rv-1">
+            <iframe src="https://www.youtube.com/embed/oJ3eBcEvDcU?autoplay=0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="BarberMaxx USA"></iframe>
+        </div>
+        <div class="video-glow"></div>
+    </div>
+</section>
+
+<!-- PRODUCTS CATALOG -->
+<section class="products" id="products">
+    <div class="container">
+        <div class="products-hdr rv">
+            <div class="slabel">Our Products</div>
+            <h2>Find the right tool for your craft.</h2>
+            <p class="products-sub">From clippers and trimmers to full barber combos — everything you need, one catalog.</p>
+        </div>
+
+        <div class="filter-tabs rv">
+            <button class="filter-tab active" data-filter="all">All Products</button>
+            <button class="filter-tab" data-filter="clipper">Clippers</button>
+            <button class="filter-tab" data-filter="trimmer">Trimmers</button>
+            <button class="filter-tab" data-filter="combo">Combos</button>
+            <button class="filter-tab" data-filter="shaver">Shavers</button>
+        </div>
+
+        <div class="products-grid">
+            <!-- V-001 -->
+            <div class="p-card featured rv rv-1" data-cat="clipper">
+                <span class="badge">Best Seller</span>
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-001_1.jpg?v=1776262295" alt="VGR V-001" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-001</h3>
+                    <p class="p-type">Professional Hair Clipper</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>High-torque motor</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>4 colors available</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-003 -->
+            <div class="p-card rv rv-2" data-cat="clipper">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-003-_-1_58f7f85e-5e4b-495a-aea8-94895a397b92.jpg?v=1776259168" alt="VGR V-003" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-003</h3>
+                    <p class="p-type">Professional Hair Clipper</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Stainless steel blade</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Rechargeable battery</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-285 -->
+            <div class="p-card rv rv-3" data-cat="clipper">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-258_1.jpg?v=1776259494" alt="VGR V-285" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-285</h3>
+                    <p class="p-type">Professional Hair Clipper</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cordless operation</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multi-color options</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-285T -->
+            <div class="p-card rv rv-4" data-cat="clipper">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-285T_1.jpg?v=1776259582" alt="VGR V-285T" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-285T</h3>
+                    <p class="p-type">T-Blade Hair Clipper</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>T-Blade precision</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Long battery life</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-600 -->
+            <div class="p-card rv rv-1" data-cat="clipper">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/CopyofArtboard1.webp?v=1776363251" alt="VGR V-600" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-600</h3>
+                    <p class="p-type">Professional Hair Clipper</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Powerful motor</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Ergonomic design</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-640 -->
+            <div class="p-card rv rv-2" data-cat="clipper">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-640_1.jpg?v=1776259810" alt="VGR V-640" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-640</h3>
+                    <p class="p-type">Professional Hair Clipper</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All hair types</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Built-in battery</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-906 -->
+            <div class="p-card rv rv-3" data-cat="trimmer">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-906-2_b5a61e19-242f-4f6a-8625-8bd6096bee9c.jpg?v=1776260565" alt="VGR V-906" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-906</h3>
+                    <p class="p-type">Professional Hair Trimmer</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Precision detailing</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lightweight design</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-994 -->
+            <div class="p-card rv rv-4" data-cat="trimmer">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/D_NQ_NP_2X_784341-MLA83254903528_042025-F.webp?v=1776362992" alt="VGR V-994" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-994</h3>
+                    <p class="p-type">Professional Hair Trimmer</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Gold stainless steel</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Li-Ion rechargeable</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-377 -->
+            <div class="p-card rv rv-1" data-cat="shaver">
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-377-1.jpg?v=1776259650" alt="VGR V-377" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-377</h3>
+                    <p class="p-type">Professional Electric Shaver</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Flexible shaving heads</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Wet &amp; dry use</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-640 S2 -->
+            <div class="p-card rv rv-2" data-cat="combo">
+                <span class="badge combo">2-in-1</span>
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/V-640-1.jpg?v=1776260291" alt="VGR V-640 S2" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-640 S2</h3>
+                    <p class="p-type">Barber Combo 2-in-1</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Clipper + Trimmer</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Complete kit</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-640 S3 -->
+            <div class="p-card rv rv-3" data-cat="combo">
+                <span class="badge combo">3-in-1</span>
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/1.jpg?v=1776260319" alt="VGR V-640 S3" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-640 S3</h3>
+                    <p class="p-type">Barber Combo 3-in-1</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Clipper + Trimmer + Shaver</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Premium design</div>
+                    </div>
+                </div>
+            </div>
+            <!-- V-035 S3 -->
+            <div class="p-card rv rv-4" data-cat="combo">
+                <span class="badge combo">3-in-1</span>
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/1_4825b3a9-7790-4681-a5b7-0f4a0dd9e3cf.jpg?v=1776262250" alt="VGR V-035 S3" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">VGR V-035 S3</h3>
+                    <p class="p-type">Barber Combo 3-in-1</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full grooming set</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Stainless steel blades</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Stepless Pro -->
+            <div class="p-card rv rv-1" data-cat="combo">
+                <span class="badge combo">3-in-1</span>
+                <div class="p-img"><img src="https://cdn.shopify.com/s/files/1/0766/3773/3035/files/2-1.jpg?v=1776260711" alt="VGR Stepless Pro" loading="lazy"></div>
+                <div class="p-info">
+                    <h3 class="p-name">Stepless Pro</h3>
+                    <p class="p-type">3-in-1 Barber Combo</p>
+                    <div class="p-specs">
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Stepless speed control</div>
+                        <div class="p-spec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Top-tier performance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof" id="proof">
+    <div class="container">
+        <div class="proof-hdr rv">
+            <div class="slabel">Trust &amp; Proof</div>
+            <h2>New to the US. <span class="hl">Not new to the game.</span></h2>
+            <p class="proof-sub">VGR is exported to 30+ countries worldwide. Barbers in Brazil, Paraguay, and across Latin America rely on these clippers daily.</p>
+        </div>
+        <div class="proof-stats">
+            <div class="proof-st rv rv-1"><div class="sn" data-count="30" data-suffix="+">0</div><div class="sl">Countries</div></div>
+            <div class="proof-st rv rv-2"><div class="sn" data-count="500" data-suffix="K+">0</div><div class="sl">Units Sold</div></div>
+            <div class="proof-st rv rv-3"><div class="sn" data-count="10" data-suffix="+">0</div><div class="sl">Years Manufacturing</div></div>
+            <div class="proof-st rv rv-4"><div class="sn" data-count="98" data-suffix="%">0</div><div class="sl">Satisfaction Rate</div></div>
+        </div>
+        <div class="tests">
+            <div class="test rv rv-1">
+                <div class="stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <p>"I was skeptical at first, but the VGR V-001 outperforms clippers twice its price. Consistent power all day long."</p>
+                <div class="test-author"><div class="test-av">MC</div><div><div class="test-name">Marcus C.</div><div class="test-loc">Miami, FL</div></div></div>
+            </div>
+            <div class="test rv rv-2">
+                <div class="stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <p>"Clean fades every single time. My clients noticed the difference immediately. Best investment I made this year."</p>
+                <div class="test-author"><div class="test-av">DR</div><div><div class="test-name">David R.</div><div class="test-loc">Houston, TX</div></div></div>
+            </div>
+            <div class="test rv rv-3">
+                <div class="stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <p>"I run a shop with 6 chairs. Switched the whole crew to VGR — saved money and got better performance."</p>
+                <div class="test-author"><div class="test-av">JS</div><div><div class="test-name">James S.</div><div class="test-loc">Atlanta, GA</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section class="objections" id="objections">
+    <div class="container">
+        <div class="obj-hdr rv"><div class="slabel">Why VGR</div><h2>Why barbers are switching to VGR.</h2></div>
+        <div class="obj-grid">
+            <div class="obj-card rv rv-1"><div class="obj-num">01</div><h3>"Is it really professional quality?"</h3><p>VGR clippers are engineered with the same precision standards as brands charging 2-3x more. High-torque motors, surgical-grade blades, and aircraft-grade aluminum bodies.</p></div>
+            <div class="obj-card rv rv-2"><div class="obj-num">02</div><h3>"Will it last?"</h3><p>Built for continuous professional use with reinforced internals and durable blade assemblies. Engineered from the ground up for daily barbershop demands.</p></div>
+            <div class="obj-card rv rv-3"><div class="obj-num">03</div><h3>"What if I need support?"</h3><p>We've got you covered. BarberMaxx USA offers direct support, hassle-free returns via Amazon FBA, and a dedicated team ready to help.</p></div>
+            <div class="obj-card rv rv-4"><div class="obj-num">04</div><h3>"I've never heard of VGR."</h3><p>VGR has been manufacturing professional grooming tools for over a decade, sold in 30+ countries. New to the US — not new to the industry.</p></div>
+        </div>
+
+        <!-- COMPARISON -->
+        <div class="comp-hdr rv" style="margin-top:5rem"><div class="slabel">Compare</div><h2>See how VGR stacks up.</h2></div>
+        <div class="comp-table rv">
+            <div class="comp-row hdr"><div class="comp-cell">Feature</div><div class="comp-cell vgr">VGR by BarberMaxx</div><div class="comp-cell">Premium Brands</div></div>
+            <div class="comp-row"><div class="comp-cell">Professional-grade motor</div><div class="comp-cell vgr"><span class="chk">&#10003;</span></div><div class="comp-cell"><span class="chk">&#10003;</span></div></div>
+            <div class="comp-row"><div class="comp-cell">240+ min battery</div><div class="comp-cell vgr"><span class="chk">&#10003;</span></div><div class="comp-cell"><span class="crs">&#10007;</span></div></div>
+            <div class="comp-row"><div class="comp-cell">Zero-gap capable</div><div class="comp-cell vgr"><span class="chk">&#10003;</span></div><div class="comp-cell"><span class="chk">&#10003;</span></div></div>
+            <div class="comp-row"><div class="comp-cell">Ergonomic design</div><div class="comp-cell vgr"><span class="chk">&#10003;</span></div><div class="comp-cell"><span class="chk">&#10003;</span></div></div>
+            <div class="comp-row"><div class="comp-cell">Under $100</div><div class="comp-cell vgr"><span class="chk">&#10003;</span></div><div class="comp-cell"><span class="crs">&#10007;</span></div></div>
+            <div class="comp-row"><div class="comp-cell">Amazon FBA shipping</div><div class="comp-cell vgr"><span class="chk">&#10003;</span></div><div class="comp-cell"><span class="crs">&#10007;</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-end" id="cta">
+    <div class="container">
+        <div class="cta-inner rv">
+            <div class="slabel">Get Started</div>
+            <h2>Ready to upgrade your kit?</h2>
+            <p class="cta-end-text">Talk to our team and find the right clipper for your shop. No pressure — just real answers from people who know the craft.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn-p"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Talk to a Specialist</a>
+                <a href="#products" class="btn-s">See the Full Catalog</a>
+            </div>
+            <div class="cta-guar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>Fast shipping via Amazon FBA &nbsp;|&nbsp; Direct support &nbsp;|&nbsp; Hassle-free returns</div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-logo">BARBER<span>MAXX</span> USA</div>
+            <div class="footer-links"><a href="#products">Products</a><a href="#benefits">Benefits</a><a href="#proof">About</a><a href="#cta">Contact</a></div>
+            <div class="footer-copy">&copy; 2026 BarberMaxx USA. All rights reserved.</div>
+        </div>
+    </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<div class="float-cta" id="floatingCta">
+    <a href="#cta"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Talk to a Specialist</a>
+</div>
+
+<script>
+// Navbar
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.pageYOffset>50)});
+
+// Reveal
+const rvObs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting){n.target.classList.add('vis');rvObs.unobserve(n.target)}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
+
+// Counter
+document.querySelectorAll('[data-count]').forEach(el=>{
+    const cObs=new IntersectionObserver(e=>{e.forEach(n=>{
+        if(n.isIntersecting&&!n.target.dataset.a){
+            n.target.dataset.a='1';
+            const t=+n.target.dataset.count,s=n.target.dataset.suffix||'+',d=1800,st=performance.now();
+            (function u(c){const p=Math.min((c-st)/d,1),v=Math.floor((1-Math.pow(1-p,3))*t);
+            n.target.textContent=v+(p>=1?s:'');p<1&&requestAnimationFrame(u)})(st);
+        }
+    })},{threshold:0.5});
+    cObs.observe(el);
+});
+
+// Float CTA
+const fc=document.getElementById('floatingCta'),hs=document.getElementById('hero');
+if(fc){new IntersectionObserver(e=>{e.forEach(n=>{fc.classList.toggle('vis',!n.isIntersecting)})},{threshold:0}).observe(hs)}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));t&&window.scrollTo({top:t.offsetTop-68,behavior:'smooth'})})});
+
+// Product filter
+document.querySelectorAll('.filter-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+        document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+        const f=tab.dataset.filter;
+        document.querySelectorAll('.p-card').forEach(c=>{
+            if(f==='all'){c.removeAttribute('data-hidden');c.style.display=''}
+            else{
+                if(c.dataset.cat===f){c.removeAttribute('data-hidden');c.style.display=''}
+                else{c.setAttribute('data-hidden','true');c.style.display='none'}
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
